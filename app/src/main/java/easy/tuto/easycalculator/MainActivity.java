@@ -14,7 +14,7 @@ import org.mozilla.javascript.Scriptable;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView resultTv,solutionTv;
-    MaterialButton buttonC,buttonBrackOpen,buttonBrackClose;
+    MaterialButton buttonC;
     MaterialButton buttonDivide,buttonMultiply,buttonPlus,buttonMinus,buttonEquals;
     MaterialButton button0,button1,button2,button3,button4,button5,button6,button7,button8,button9;
     MaterialButton buttonAC,buttonDot;
@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        solutionTv = findViewById(R.id.solution_tv);
 
        assignId(buttonC,R.id.button_c);
-       assignId(buttonBrackOpen,R.id.button_open_bracket);
-       assignId(buttonBrackClose,R.id.button_close_bracket);
        assignId(buttonDivide,R.id.button_divide);
        assignId(buttonMultiply,R.id.button_multiply);
        assignId(buttonPlus,R.id.button_plus);
@@ -76,7 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         if(buttonText.equals("C")){
-            dataToCalculate = dataToCalculate.substring(0,dataToCalculate.length()-1);
+            if(dataToCalculate.length()>0) {
+                dataToCalculate = dataToCalculate.substring(0, dataToCalculate.length() - 1);
+            }else{
+                solutionTv.setText("");
+                resultTv.setText("0");
+                return;
+            }
         }else{
             dataToCalculate = dataToCalculate+buttonText;
         }
